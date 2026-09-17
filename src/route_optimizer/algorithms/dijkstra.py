@@ -3,6 +3,7 @@ import heapq
 
 def dijkstra(graph, start):
     distances = {}
+    previous = {}
 
     for node in graph.nodes():
         distances[node] = float("inf")
@@ -30,6 +31,24 @@ def dijkstra(graph, start):
 
             if new_distance < distances[neighbour]:
                 distances[neighbour] = new_distance
+                previous[neighbour] = current_node
                 heapq.heappush(queue, (new_distance, neighbour))
 
-    return distances
+    return distances, previous
+
+
+def reconstruct_path(previous, start, destination):
+    path = []
+    current = destination
+
+    while current != start:
+        if current not in previous:
+            return None
+
+        path.append(current)
+        current = previous[current]
+
+    path.append(start)
+    path.reverse()
+
+    return path
