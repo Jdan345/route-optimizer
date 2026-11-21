@@ -76,14 +76,14 @@ def draw_network(roads, path=None):
     for source, destination, distance in roads:
         network.add_edge(source, destination, weight=distance)
 
-    fig, ax = plt.subplots(figsize=(12, 7))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
 
     # Draw all nodes
     nx.draw_networkx_nodes(
         network,
         positions,
         node_color="#DCEBFA",
-        node_size=1500,
+        node_size=950,
         ax=ax,
     )
 
@@ -134,7 +134,7 @@ def draw_network(roads, path=None):
             positions,
             nodelist=path,
             node_color="#6AB6FF",
-            node_size=1500,
+            node_size=950,
             ax=ax,
         )
 
@@ -216,11 +216,19 @@ st.divider()
 if path is None:
     st.warning("No route exists between these cities.")
 else:
-    st.metric("Total route cost", f"{distance:g}")
+    st.markdown(
+        f"""
+        <div style="text-align: center; margin: 5px 0 10px;">
+            <div style="font-size: 20px;">Total Route Cost</div>
+            <div style="font-size: 64px; font-weight: bold;">{distance:g}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.success(" → ".join(path))
 
 figure = draw_network(roads, path)
-st.pyplot(figure)
+st.pyplot(figure, use_container_width=False)
 plt.close(figure)
 
 st.caption(

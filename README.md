@@ -4,6 +4,10 @@ An interactive Python application for exploring and comparing shortest-path algo
 
 Built using Python, Streamlit, NetworkX and Matplotlib.
 
+## Dashboard Preview
+
+![Route Optimizer Dashboard](assets/dashboard.png)
+
 ## Features
 
 * **Interactive route finder:** Select a starting city and destination to calculate the minimum-cost route.
